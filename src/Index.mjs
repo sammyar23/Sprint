@@ -7,9 +7,9 @@ const app = express();
 const port = 3000;
 
 const db = await mysql.createConnection({
-  host: 'localhost',
-  user: 'your_user',
-  password: 'your_password',
+  host: 'database',
+  user: 'user',
+  password: 'password',
   database: 'population',
 });
 
