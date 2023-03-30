@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1 Population
+
+  table.table.table-striped
+    h2 Cities Table
+    thead
+      tr
+        th.text-center City
+        th.text-center Population
+    tbody
+      each row in rows
+        tr
+          td #{row.city_name}
+          td.text-center #{row.population.toLocaleString()}
