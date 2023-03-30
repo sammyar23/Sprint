@@ -1,18 +1,10 @@
-# Use Node JS v16.x as base image
-FROM node:latest
-
-# Create server directory inside image
-WORKDIR /app
-
-# Copy the source code (src -> /app)
-# node_modules directory is ignored via .dockerignore file
+FROM node:lts-alpine
+ENV NODE_ENV=production
+WORKDIR /usr/src/app
+COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
+RUN npm install --production --silent && mv node_modules ../
 COPY . .
-
-# Install dependencies (inside the container)
-RUN npm install
-
-# Expose server port
 EXPOSE 3000
-
-# Start server using npm script
-CMD [ "npm", "run", "start" ]
+RUN chown -R node /usr/src/app
+USER node
+CMD ["npm", "start"]
